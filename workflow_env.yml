@@ -1,0 +1,12 @@
+#conda yaml
+name: workflow_env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - snakemake
+  - numpy
+  - nextflow
+  - openjdk
+  - slim

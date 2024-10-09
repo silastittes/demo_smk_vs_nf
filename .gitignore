@@ -1,0 +1,6 @@
+.nextflow/
+.nextflow.log*
+.snakemake
+smk_output/
+NF_output/
+work/
