@@ -16,6 +16,11 @@ process generate_output {
     // Copy out of the work directory (can symlink or other options too)
     publishDir "${params.outdir}/seed_${seed}", mode: 'copy'
 
+    clusterOptions = " --time 1:00:00"
+    clusterOptions += " --mem 4GB"
+    clusterOptions += " --partition kerngpu"
+    clusterOptions += " --gres=gpu:1"
+
     input:
         val(seed)
     output:
