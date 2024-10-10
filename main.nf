@@ -5,21 +5,20 @@
 // Read values from file
 value_channel = channel.fromPath('seeds.txt')
     .splitCsv(header: true)
-    .map { row -> tuple(row.seeds, row.test) }
+    .map { row -> row.seeds}
 
 // Define the output directory
 params.outdir = 'NF_output'
 
 // Define the process
 process generate_output {
-    //publishDir params.outdir, mode: 'copy'
     publishDir "${params.outdir}/seed_${seed}", mode: 'copy'
 
     input:
-    tuple val(seed), val(test)
+    val(seed)
 
     output:
-    path("output_seed_${seed}.txt"), emit: results
+    path("output_seed_${seed}.txt")
 
     script:
     """
@@ -27,7 +26,6 @@ process generate_output {
     """
 }
 
-// try PWD maybe?
 process collect_output {
      publishDir "${params.outdir}", mode: 'copy'
 
@@ -44,8 +42,6 @@ process collect_output {
 }
 
 workflow {
-    // Run the process for each value
     output_files = generate_output(value_channel)
-    // Collect the output
     collect_output(output_files.collect())
 }

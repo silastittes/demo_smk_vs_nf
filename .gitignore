@@ -4,3 +4,4 @@
 smk_output/
 NF_output/
 work/
+slurm_logs/
